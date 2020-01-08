@@ -5,7 +5,6 @@ DROP TABLE IF EXISTS restaurant_dishes;
 DROP SEQUENCE IF EXISTS global_seq;
 
 CREATE SEQUENCE global_seq START WITH 100000;
-CREATE SEQUENCE global_seq_user START WITH 100000;
 
 CREATE TABLE restaurants
 (
@@ -24,7 +23,7 @@ CREATE TABLE restaurant_dishes
 
 CREATE TABLE users
 (
-    id              INTEGER PRIMARY KEY DEFAULT nextval('global_seq_user'),
+    id              INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     vote_time       TIMESTAMP                   NOT NULL,
     vote_id         INTEGER                     NOT NULL,
     FOREIGN KEY (vote_id) REFERENCES restaurants (id)

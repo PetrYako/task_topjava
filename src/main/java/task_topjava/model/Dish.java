@@ -27,6 +27,31 @@ public class Dish extends AbstractBaseEntity{
 
     public Dish(Integer id, String description, Integer calories) {
         super(id);
-        // :TODO
+        this.description = description;
+        this.calories = calories;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Integer calories) {
+        this.calories = calories;
+    }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "description=" + description +
+                ", calories=" + calories +
+                + '}';
     }
 }
