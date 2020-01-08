@@ -1,14 +1,23 @@
 package task_topjava.model;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
+
+@NamedQueries({
+        @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
+})
 @Entity
 @Table(name = "restaurants")
 public class Restaurant extends AbstractNamedEntity {
+    public static final String DELETE = "Restaurant.delete";
+    public static final String GET_AMOUNT_OF_VOTES = "Restaurant.getAmountOfVotes";
 
     @Column(name = "name", nullable = false)
     @NotBlank

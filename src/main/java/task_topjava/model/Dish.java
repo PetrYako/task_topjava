@@ -1,17 +1,23 @@
 package task_topjava.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@NamedQueries({
+        @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id AND d.restaurant.id=:restaurantId"),
+        @NamedQuery(name = Dish.GET_ALL, query = "SELECT Dish FROM Dish d WHERE d.restaurant.id=:restaurantId")
+})
 @Entity
 @Table(name = "restaurant_dishes")
-public class Dish extends AbstractBaseEntity{
+public class Dish extends AbstractBaseEntity {
+    public static final String DELETE = "Dish.delete";
+    public static final String GET_ALL = "Dish.getAll";
 
     @Column(name = "description", nullable = false)
     @NotBlank
@@ -22,6 +28,12 @@ public class Dish extends AbstractBaseEntity{
     @NotNull
     @Range(min = 10, max = 5000)
     private Integer calories;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
+    private Restaurant restaurant;
 
     public Dish() {}
 
@@ -45,6 +57,14 @@ public class Dish extends AbstractBaseEntity{
 
     public void setCalories(Integer calories) {
         this.calories = calories;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Override

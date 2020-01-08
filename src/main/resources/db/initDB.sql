@@ -15,19 +15,21 @@ CREATE TABLE restaurants
 
 CREATE TABLE restaurant_dishes
 (
-    dishe_id     INTEGER NOT NULL,
-    description  VARCHAR NOT NULL,
-    calories     INTEGER NOT NULL,
-    FOREIGN KEY (dishe_id) REFERENCES restaurants (id) ON DELETE CASCADE
+    id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+    restaurant_id INTEGER NOT NULL,
+    description   VARCHAR NOT NULL,
+    calories      INTEGER NOT NULL,
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
 
 CREATE TABLE users
 (
     id              INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-    vote_time       TIMESTAMP                   NOT NULL,
-    vote_id         INTEGER                     NOT NULL,
-    FOREIGN KEY (vote_id) REFERENCES restaurants (id)
+    password        VARCHAR                     NOT NULL,
+    email           VARCHAR                     NOT NULL,
+    vote_time       TIMESTAMP                   NOT NULL
 );
+CREATE UNIQUE INDEX users_unique_email_idx ON users(email);
 
 CREATE TABLE user_roles
 (
