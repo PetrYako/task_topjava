@@ -12,9 +12,5 @@ public interface RestaurantRepository {
 
     boolean delete(int id);
 
-    Integer getAmountOfVotes(int id);
-
-    void vote(int id);
-
-    void unVote(int id);
+    List<Restaurant> getAll();
 }

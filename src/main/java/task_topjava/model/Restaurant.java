@@ -1,9 +1,9 @@
 package task_topjava.model;
 
-import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+import task_topjava.View;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,38 +12,36 @@ import java.util.List;
 
 @NamedQueries({
         @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
+        @NamedQuery(name = Restaurant.GET_ALL, query = "SELECT r FROM Restaurant r")
 })
 @Entity
 @Table(name = "restaurants")
 public class Restaurant extends AbstractNamedEntity {
     public static final String DELETE = "Restaurant.delete";
-    public static final String GET_AMOUNT_OF_VOTES = "Restaurant.getAmountOfVotes";
+    public static final String GET_ALL = "Restaurant.getAll";
 
     @Column(name = "name", nullable = false)
-    @NotBlank
-    @Size(min = 3, max = 50)
     private String name;
 
     @Column(name = "vote_amount", nullable = false)
-    @NotNull
-    private Integer vote_amount;
+    private Integer voteAmount;
 
     @OneToMany(fetch = FetchType.LAZY)
     protected List<Dish> dishes;
 
     public Restaurant() {}
 
-    public Restaurant(Integer id, String name, Integer vote_amount) {
+    public Restaurant(Integer id, String name, Integer voteAmount) {
         super(id, name);
-        this.vote_amount = vote_amount;
+        this.voteAmount = voteAmount;
     }
 
-    public Integer getVote_amount() {
-        return vote_amount;
+    public Integer getVoteAmount() {
+        return voteAmount;
     }
 
-    public void setVote_amount(Integer vote_amount) {
-        this.vote_amount = vote_amount;
+    public void setVoteAmount(Integer voteAmount) {
+        this.voteAmount = voteAmount;
     }
 
     public List<Dish> getDishes() {
@@ -54,7 +52,7 @@ public class Restaurant extends AbstractNamedEntity {
     public String toString() {
         return "Restaurant{" +
                 "name=" + name +
-                ", vote_amount=" + vote_amount +
+                ", voteAmount=" + voteAmount +
                 '}';
     }
 }

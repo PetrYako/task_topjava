@@ -42,21 +42,8 @@ public class JpaRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
-    public Integer getAmountOfVotes(int id) {
-        return get(id).getVote_amount();
-    }
-
-    @Override
-    public void vote(int id) {
-        Restaurant restaurant = get(id);
-        restaurant.setVote_amount(restaurant.getVote_amount() + 1);
-        save(restaurant);
-    }
-
-    @Override
-    public void unVote(int id) {
-        Restaurant restaurant = get(id);
-        restaurant.setVote_amount(restaurant.getVote_amount() - 1);
-        save(restaurant);
+    public List<Restaurant> getAll() {
+        return em.createNamedQuery(Restaurant.GET_ALL, Restaurant.class)
+                .getResultList();
     }
 }

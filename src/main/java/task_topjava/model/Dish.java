@@ -3,6 +3,8 @@ package task_topjava.model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+import task_topjava.View;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -20,19 +22,15 @@ public class Dish extends AbstractBaseEntity {
     public static final String GET_ALL = "Dish.getAll";
 
     @Column(name = "description", nullable = false)
-    @NotBlank
-    @Size(min = 3, max = 50)
     private String description;
 
     @Column(name = "calories", nullable = false)
-    @NotNull
-    @Range(min = 10, max = 5000)
     private Integer calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
+    @NotNull(groups = View.Persist.class)
     private Restaurant restaurant;
 
     public Dish() {}

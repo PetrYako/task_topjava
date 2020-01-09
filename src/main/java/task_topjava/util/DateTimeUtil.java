@@ -1,6 +1,4 @@
-package task_topjava.model.util;
-
-import org.springframework.format.annotation.DateTimeFormat;
+package task_topjava.util;
 
 import java.time.format.DateTimeFormatter;
 

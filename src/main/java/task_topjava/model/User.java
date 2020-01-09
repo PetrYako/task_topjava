@@ -2,10 +2,11 @@ package task_topjava.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.OnDelete;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.CollectionUtils;
-import task_topjava.model.util.DateTimeUtil;
+import task_topjava.View;
+import task_topjava.util.DateTimeUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -17,26 +18,25 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM User u WHERE u.email=:email")
+})
 @Entity
 @Table(name="users")
-public class User extends AbstractBaseEntity{
+public class User extends AbstractBaseEntity implements HasEmail {
+    public static final String BY_EMAIL = "User.byEmail";
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "password", nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
 
     @Column(name = "vote_time", nullable = false)
     @NotNull
     @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
-    private LocalDateTime vote_time;
-
-    @Column(name = "email", nullable = false, unique = true)
-    @Email
-    @NotBlank
-    @Size(max = 100)
-    private String email;
-
-    @Column(name = "password", nullable = false)
-    @NotBlank
-    @Size(min = 5, max = 100)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
+    private LocalDateTime voteTime;
 
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
@@ -47,22 +47,22 @@ public class User extends AbstractBaseEntity{
 
     public User() {}
 
-    public User(Integer id, LocalDateTime vote_time, Role role,  Role... roles) {
-        this(id, vote_time, EnumSet.of(role, roles));
+    public User(Integer id, LocalDateTime voteTime, Role role,  Role... roles) {
+        this(id, voteTime, EnumSet.of(role, roles));
     }
 
-    public User(Integer id, LocalDateTime vote_time, Collection<Role> roles) {
+    public User(Integer id, LocalDateTime voteTime, Collection<Role> roles) {
         super(id);
-        this.vote_time = vote_time;
+        this.voteTime = voteTime;
         setRoles(roles);
     }
 
-    public LocalDateTime getVote_time() {
-        return vote_time;
+    public LocalDateTime getVoteTime() {
+        return voteTime;
     }
 
-    public void setVote_time(LocalDateTime vote_time) {
-        this.vote_time = vote_time;
+    public void setVoteTime(LocalDateTime voteTime) {
+        this.voteTime = voteTime;
     }
 
     public void setRoles(Collection<Role> roles) {
@@ -73,6 +73,7 @@ public class User extends AbstractBaseEntity{
         return roles;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
@@ -93,7 +94,7 @@ public class User extends AbstractBaseEntity{
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", vote_time=" + vote_time +
+                ", voteTime=" + voteTime +
                 ", role=" + roles +
                 '}';
     }
