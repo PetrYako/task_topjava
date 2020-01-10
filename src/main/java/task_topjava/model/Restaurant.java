@@ -12,13 +12,15 @@ import java.util.List;
 
 @NamedQueries({
         @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
-        @NamedQuery(name = Restaurant.GET_ALL, query = "SELECT r FROM Restaurant r")
+        @NamedQuery(name = Restaurant.GET_ALL, query = "SELECT r FROM Restaurant r"),
+        @NamedQuery(name = Restaurant.CLEAR, query = "DELETE FROM Restaurant")
 })
 @Entity
 @Table(name = "restaurants")
 public class Restaurant extends AbstractNamedEntity {
     public static final String DELETE = "Restaurant.delete";
     public static final String GET_ALL = "Restaurant.getAll";
+    public static final String CLEAR = "Restaurant.clear";
 
     @Column(name = "name", nullable = false)
     private String name;

@@ -3,12 +3,16 @@ package task_topjava.util;
 import org.slf4j.Logger;
 import org.springframework.security.acls.model.NotFoundException;
 import task_topjava.model.HasId;
+import task_topjava.util.exception.DateException;
 import task_topjava.util.exception.IllegalRequestDataException;
 
 import javax.lang.model.type.ErrorType;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.*;
+import java.time.LocalDateTime;
 import java.util.Set;
+
+import static task_topjava.util.DateTimeUtil.*;
 
 public class ValidationUtil {
 
@@ -29,6 +33,12 @@ public class ValidationUtil {
         if (!found) {
             throw new NotFoundException(arg);
         }
+    }
+
+    public static void checkDate(LocalDateTime ldt) {
+       if (isAfterElevenHours(ldt)) {
+           throw new DateException("vote can't be changed after 11:00");
+       }
     }
 
     public static void checkNew(HasId bean) {

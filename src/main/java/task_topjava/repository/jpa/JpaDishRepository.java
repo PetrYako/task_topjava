@@ -51,4 +51,10 @@ public class JpaDishRepository implements DishRepository {
                 .setParameter("restaurantId", restaurantId)
                 .getResultList();
     }
+
+    @Override
+    @Transactional
+    public void clear() {
+        em.createNamedQuery(Dish.CLEAR).executeUpdate();
+    }
 }

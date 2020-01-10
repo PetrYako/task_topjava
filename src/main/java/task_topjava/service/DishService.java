@@ -29,13 +29,17 @@ public class DishService {
 
     public List<Dish> getAll(int restaurantId) { return repository.getAll(restaurantId); }
 
-    public void update(Dish dish, int restaurantId) {
+    public void update(Dish dish, int id, int restaurantId) {
         Assert.notNull(dish, "dish must not be null");
-        checkNotFoundWithId(repository.save(dish, restaurantId), dish.getId());
+        checkNotFoundWithId(repository.save(dish, id), dish.getId());
     }
 
     public Dish create(Dish dish, int restaurantId) {
         Assert.notNull(dish, "dish must not be null");
         return repository.save(dish, restaurantId);
+    }
+
+    public void clear() {
+        repository.clear();
     }
 }

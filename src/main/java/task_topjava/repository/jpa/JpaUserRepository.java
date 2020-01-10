@@ -42,4 +42,10 @@ public class JpaUserRepository implements UserRepository {
                                 .getResultList();
         return DataAccessUtils.singleResult(userList);
     }
+
+    @Override
+    @Transactional
+    public void clear() {
+        em.createNamedQuery(User.CLEAR).executeUpdate();
+    }
 }

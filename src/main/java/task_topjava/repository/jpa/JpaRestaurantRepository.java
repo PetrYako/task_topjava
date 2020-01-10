@@ -46,4 +46,10 @@ public class JpaRestaurantRepository implements RestaurantRepository {
         return em.createNamedQuery(Restaurant.GET_ALL, Restaurant.class)
                 .getResultList();
     }
+
+    @Override
+    @Transactional
+    public void clear() {
+        em.createNamedQuery(Restaurant.CLEAR).executeUpdate();
+    }
 }

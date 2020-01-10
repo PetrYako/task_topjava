@@ -13,13 +13,15 @@ import javax.validation.constraints.Size;
 
 @NamedQueries({
         @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id AND d.restaurant.id=:restaurantId"),
-        @NamedQuery(name = Dish.GET_ALL, query = "SELECT Dish FROM Dish d WHERE d.restaurant.id=:restaurantId")
+        @NamedQuery(name = Dish.GET_ALL, query = "SELECT Dish FROM Dish d WHERE d.restaurant.id=:restaurantId"),
+        @NamedQuery(name = Dish.CLEAR, query = "DELETE FROM Dish")
 })
 @Entity
 @Table(name = "restaurant_dishes")
 public class Dish extends AbstractBaseEntity {
     public static final String DELETE = "Dish.delete";
     public static final String GET_ALL = "Dish.getAll";
+    public static final String CLEAR = "Dish.clear";
 
     @Column(name = "description", nullable = false)
     private String description;
