@@ -18,7 +18,7 @@ CREATE TABLE restaurant_menu
 (
     id            INTEGER   PRIMARY KEY DEFAULT nextval('global_seq_restaurant'),
     restaurant_id INTEGER   NOT NULL,
-    votes         INTEGER   NOT NULL,
+    votes         INTEGER   NOT NULL DEFAULT 0,
     create_time   TIMESTAMP NOT NULL,
     CONSTRAINT restaurant_menu_idx UNIQUE (restaurant_id),
     FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
@@ -29,7 +29,7 @@ CREATE TABLE menu_dish
     id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq_restaurant'),
     menu_id     INTEGER NOT NULL,
     description VARCHAR NOT NULL,
-    calories    INTEGER NOT NULL
+    price       INTEGER NOT NULL
 );
 
 CREATE TABLE users
