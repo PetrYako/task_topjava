@@ -1,6 +1,6 @@
-package task_topjava.to;
+package com.taskTopjava.to;
 
-import task_topjava.model.HasId;
+import com.taskTopjava.model.HasId;
 
 public abstract class BaseTo implements HasId {
     protected Integer id;

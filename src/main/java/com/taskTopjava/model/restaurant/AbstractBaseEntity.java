@@ -1,10 +1,9 @@
-package task_topjava.model.restaurant;
+package com.taskTopjava.model.restaurant;
 
+import com.taskTopjava.model.HasId;
 import org.springframework.data.annotation.AccessType;
-import task_topjava.model.HasId;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @MappedSuperclass
 @AccessType(AccessType.Type.FIELD)

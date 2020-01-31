@@ -1,4 +1,4 @@
-package task_topjava.model.user;
+package com.taskTopjava.model.user;
 
 public enum Role {
     ROLE_USER,

@@ -1,10 +1,9 @@
-package task_topjava.model.user;
+package com.taskTopjava.model.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.Fetch;
 import org.springframework.data.annotation.AccessType;
-import task_topjava.model.HasEmail;
-import task_topjava.model.HasId;
+import com.taskTopjava.model.HasEmail;
+import com.taskTopjava.model.HasId;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

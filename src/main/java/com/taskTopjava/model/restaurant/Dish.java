@@ -1,4 +1,4 @@
-package task_topjava.model.restaurant;
+package com.taskTopjava.model.restaurant;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

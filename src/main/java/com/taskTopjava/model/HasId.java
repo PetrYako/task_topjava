@@ -1,4 +1,4 @@
-package task_topjava.model;
+package com.taskTopjava.model;
 
 import org.springframework.util.Assert;
 
