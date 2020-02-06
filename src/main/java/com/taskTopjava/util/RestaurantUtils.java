@@ -7,6 +7,7 @@ import com.taskTopjava.to.restaurantTo.DishTo;
 import com.taskTopjava.to.restaurantTo.MenuTo;
 import com.taskTopjava.to.restaurantTo.RestaurantTo;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,16 +15,18 @@ public class RestaurantUtils {
 
     private RestaurantUtils() {}
 
-    public static RestaurantTo createRestaurantTo(Restaurant restaurant) {
-        return new RestaurantTo(restaurant.id(), restaurant.getName());
+    public static RestaurantTo createRestaurantTo(Restaurant restaurant, LocalDate date) {
+        Menu menu = restaurant.getMenu().stream().filter(m -> m.getCreateTime().equals(date))
+                    .findFirst().orElse(null);
+        return new RestaurantTo(restaurant.id(), restaurant.getName(), createMenuTo(menu));
     }
 
-    public static List<RestaurantTo> getRestaurantTos(List<Restaurant> restaurants) {
-        return restaurants.stream().map(RestaurantUtils::createRestaurantTo).collect(Collectors.toList());
+    public static List<RestaurantTo> getRestaurantTos(List<Restaurant> restaurants, LocalDate date) {
+        return restaurants.stream().map(r -> createRestaurantTo(r, date)).collect(Collectors.toList());
     }
 
     public static MenuTo createMenuTo(Menu menu) {
-        return new MenuTo(menu.id(), menu.getVotes(), menu.getCreateTime());
+        return new MenuTo(menu.id(), menu.getVotes(), menu.getCreateTime(), getDishTos(menu.getDishes()));
     }
 
     public static List<MenuTo> getMenuTos(List<Menu> menus) {

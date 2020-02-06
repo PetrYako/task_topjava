@@ -10,7 +10,8 @@ public class Restaurant extends AbstractBaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
     private List<Menu> menu;
 
     public Restaurant() {}

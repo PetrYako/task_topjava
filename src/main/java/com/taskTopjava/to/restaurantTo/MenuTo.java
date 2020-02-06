@@ -6,6 +6,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 public class MenuTo extends BaseTo implements Serializable {
     private static final long serialVersionUID = 2L;
@@ -17,12 +18,16 @@ public class MenuTo extends BaseTo implements Serializable {
     @NotNull
     private LocalDate createTime;
 
+    @NotNull
+    private List<DishTo> dish;
+
     public MenuTo() {}
 
-    public MenuTo(Integer id, Integer votes, LocalDate createTime) {
+    public MenuTo(Integer id, Integer votes, LocalDate createTime, List<DishTo> dish) {
         super(id);
         this.votes = votes;
         this.createTime = createTime;
+        this.dish = dish;
     }
 
     public Integer getVotes() {
@@ -47,5 +52,13 @@ public class MenuTo extends BaseTo implements Serializable {
                 "votes=" + votes +
                 ", createTime=" + createTime +
                 '}';
+    }
+
+    public List<DishTo> getDish() {
+        return dish;
+    }
+
+    public void setDish(List<DishTo> dish) {
+        this.dish = dish;
     }
 }

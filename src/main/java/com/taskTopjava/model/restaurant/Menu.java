@@ -17,13 +17,9 @@ public class Menu extends AbstractBaseEntity {
     @Column(name = "create_time", nullable = false)
     private LocalDate createTime;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id")
     private List<Dish> dishes;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Restaurant restaurant;
 
     public Menu() {}
 
@@ -47,14 +43,6 @@ public class Menu extends AbstractBaseEntity {
 
     public void setCreateTime(LocalDate createTime) {
         this.createTime = createTime;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
     }
 
     public List<Dish> getDishes() {

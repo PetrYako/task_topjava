@@ -15,11 +15,6 @@ public class Dish extends AbstractBaseEntity {
     @Column(name = "price", nullable = false)
     private Integer price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Menu menu;
-
     public Dish() {}
 
     public Dish(Integer id, String description, Integer price) {
@@ -42,14 +37,6 @@ public class Dish extends AbstractBaseEntity {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
     }
 
     @Override

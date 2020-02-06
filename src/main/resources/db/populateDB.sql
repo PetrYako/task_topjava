@@ -15,11 +15,11 @@ INSERT INTO restaurant_menu(restaurant_id, votes, create_time) VALUES
     (100000, 2, '2020-01-27 15:00:00'),
     (100001, 1, '2020-01-27 15:00:00');
 
-INSERT INTO menu_dish(menu_id, description, calories) VALUES
-    (100000, 'Breakfast', 120),
-    (100000, 'Lunch', 200),
-    (100000, 'Dinner', 170),
-    (100001, 'Food', 500);
+INSERT INTO menu_dish(menu_id, description, price) VALUES
+    (100002, 'Breakfast', 120),
+    (100002, 'Lunch', 200),
+    (100002, 'Dinner', 170),
+    (100003, 'Food', 500);
 
 
 INSERT INTO users(vote_id, password, email, vote_time) VALUES
