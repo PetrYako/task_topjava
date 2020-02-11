@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,9 +15,11 @@ import java.util.List;
 public class Menu extends AbstractBaseEntity {
 
     @Column(name = "votes", nullable = false)
+    @NotNull
     private Integer votes;
 
     @Column(name = "create_time", nullable = false)
+    @NotNull
     private LocalDate createTime;
 
     @OneToMany(fetch = FetchType.EAGER)

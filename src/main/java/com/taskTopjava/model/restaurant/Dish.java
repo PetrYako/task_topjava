@@ -4,15 +4,19 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "menu_dish")
 public class Dish extends AbstractBaseEntity {
 
     @Column(name = "description", nullable = false)
+    @NotBlank
     private String description;
 
     @Column(name = "price", nullable = false)
+    @NotNull
     private Integer price;
 
     public Dish() {}
