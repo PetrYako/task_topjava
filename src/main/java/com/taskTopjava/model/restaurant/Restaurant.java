@@ -1,5 +1,8 @@
 package com.taskTopjava.model.restaurant;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,8 +13,9 @@ public class Restaurant extends AbstractBaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     private List<Menu> menu;
 
     public Restaurant() {}
@@ -33,10 +37,15 @@ public class Restaurant extends AbstractBaseEntity {
         return menu;
     }
 
+    public void setMenu(List<Menu> menu) {
+        this.menu = menu;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
                 "name='" + name + '\'' +
                 '}';
     }
+
 }

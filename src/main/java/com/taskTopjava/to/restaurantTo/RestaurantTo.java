@@ -16,11 +16,11 @@ public class RestaurantTo extends BaseTo implements Serializable {
     private String name;
 
     @NotNull
-    private MenuTo menu;
+    private Menu menu;
 
     public RestaurantTo() {}
 
-    public RestaurantTo(Integer id, String name, MenuTo menu) {
+    public RestaurantTo(Integer id, String name, Menu menu) {
         super(id);
         this.name = name;
         this.menu = menu;
@@ -41,11 +41,11 @@ public class RestaurantTo extends BaseTo implements Serializable {
                 '}';
     }
 
-    public MenuTo getMenu() {
+    public Menu getMenu() {
         return menu;
     }
 
-    public void setMenu(MenuTo menu) {
+    public void setMenu(Menu menu) {
         this.menu = menu;
     }
 }

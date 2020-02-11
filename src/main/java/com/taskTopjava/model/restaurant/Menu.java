@@ -1,5 +1,7 @@
 package com.taskTopjava.model.restaurant;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -17,8 +19,9 @@ public class Menu extends AbstractBaseEntity {
     @Column(name = "create_time", nullable = false)
     private LocalDate createTime;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "menu_id")
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     private List<Dish> dishes;
 
     public Menu() {}
@@ -47,6 +50,10 @@ public class Menu extends AbstractBaseEntity {
 
     public List<Dish> getDishes() {
         return dishes;
+    }
+
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
     }
 
     @Override
